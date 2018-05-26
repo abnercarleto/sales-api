@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     build: .
+    command: yarn run start
     volumes:
       - .:/app
     ports:
