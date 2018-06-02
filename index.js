@@ -1,14 +1,11 @@
-import express from 'express';
-import morgan from 'morgan'
+import http from 'http';
+import normalizePort from 'normalize-port';
+import app from './app';
 
-const app = express();
+const port = normalizePort(process.env.PORT || 8000);
+app.set('port', port);
 
-app.use(morgan('[:date[iso]] ":method :url" :status :response-time ms'));
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.listen(8000, () => {
-  console.log('App listening on port 8000!');
+const server = http.createServer(app);
+server.listen(app.get('port'), () => {
+  console.log(`Started on port ${server.address().port}`);
 });
